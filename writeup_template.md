@@ -67,7 +67,7 @@ For detail about IK_server.py, please look at the code.
 
 1. After implement IK_DEBUG.py, I copied them into IK_server.py, but since FK is not required in this project, I commented for T3_4,T4_5,T5_6,T6_G since I believe instancing those symbolic equation can increase memory overhead and delay
 
-2. I tried to analyze runtime in two phases: theta1 ~ theta3, and theta4 ~ theta6. After pick up the blue stick, IK is computed to drop the object to the bin. Sometimes (not always, it may depend on the initial point - where the blue stick is located), computing theta4 ~ theta6 for moving to bin takes so long time (~50sec). I tried numpy.arctan2 instead of atan2 (I believe it's math.atan2), but can't get advantage. I also think about make a huge LUT for atan2 to save the compute latency, but not sure how fine grain is required. Still not sure why computing theta4~theta6 takes so long randomly.
+2. I tried to analyze runtime in two phases: theta1 ~ theta3, and theta4 ~ theta6. After pick up the blue stick, IK is computed to drop the object to the bin. Sometimes (not always, it may depend on the initial point - where the blue stick is located), computing theta4 ~ theta6 for moving to bin takes so long time (about 50sec). I tried numpy.arctan2 instead of atan2 (I believe it's math.atan2), but can't get advantage. I also think about make a huge LUT for atan2 to save the compute latency, but not sure how fine grain is required. Still not sure why computing theta4~theta6 takes so long randomly.
 
 
 
