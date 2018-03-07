@@ -20,6 +20,7 @@
 [image1]: ./misc_images/DH.png
 [image2]: ./misc_images/J1_J6.png
 [image3]: ./misc_images/J1_J3.jpg
+[image4]: ./misc_images/URDF.PNG
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -35,7 +36,10 @@ This is the Writeup document
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-Derived DH parameters from kr210.urdf.xacro is below:
+From the lecture, I used FK video 2 illustrating incremental change for each joint. 
+![alt text][image4]
+
+Based on the video and URDF file, I dervice DH parameters from kr210.urdf.xacro is below:
 ![alt text][image1]
 
 
@@ -59,11 +63,12 @@ l_j2_wc (joint2 - wrist_center): sqrt(j2's height^2 + wc_distance_from_j1^2) = s
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
+For detail about IK_server.py, please look at the code.
 
-Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
+1. After implement IK_DEBUG.py, I copied them into IK_server.py, but since FK is not required in this project, I commented for T3_4,T4_5,T5_6,T6_G since I believe instancing those symbolic equation can increase memory overhead and delay
+
+2. I tried to analyze runtime in two phases: theta1 ~ theta3, and theta4 ~ theta6. After pick up the blue stick, IK is computed to drop the object to the bin. Sometimes (not always, it may depend on the initial point - where the blue stick is located), computing theta4 ~ theta6 for moving to bin takes so long time (~50sec). I tried numpy.arctan2 instead of atan2 (I believe it's math.atan2), but can't get advantage. I also think about make a huge LUT for atan2 to save the compute latency, but not sure how fine grain is required. Still not sure why computing theta4~theta6 takes so long randomly.
 
 
-And just for fun, another example image:
-![alt text][image3]
 
 
