@@ -19,7 +19,7 @@
 
 [image1]: ./misc_images/DH.png
 [image2]: ./misc_images/J1_J6.png
-[image3]: ./misc_images/misc2.png
+[image3]: ./misc_images/J1_J3.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -43,9 +43,16 @@ Derived DH parameters from kr210.urdf.xacro is below:
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
-And here's where you can draw out and show your math for the derivation of your theta angles. 
+![alt text][image3]
+Similar to the figure from the class, theta1 is easily calculated by using wx, wy since wx, wy are determined by only theta1.
+For theta2 and theta3, length of three sides in triangle is calculated as 
 
+l_j2_j3 (joint2 - joint3)      : 1.25 (a2 by definition)
 
+l_wc_j3 (wrist_center - joint3): sqrt(1.5^2 + 0.054^2) since 1.5 distance by x direction, 0.054 distance by y direction
+
+l_j2_wc (joint2 - wrist_center): sqrt(j2's height^2 + wc_distance_from_j1^2) = sqrt((wz-0.75)^2+(sqrt(wx^2+wy^2))^2-0.35)^2)
+ 
 
 ### Project Implementation
 
