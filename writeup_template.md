@@ -21,6 +21,8 @@
 [image2]: ./misc_images/J1_J6.png
 [image3]: ./misc_images/J1_J3.jpg
 [image4]: ./misc_images/URDF.PNG
+[image5]: ./misc_images/result_1.PNG
+[image6]: ./misc_images/result_2.PNG
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -130,6 +132,8 @@ For detail about IK_server.py, please look at the code.
 
 2. I tried to analyze runtime in two phases: theta1 ~ theta3, and theta4 ~ theta6. After pick up the blue stick, IK is computed to drop the object to the bin. Sometimes (not always, it may depend on the initial point - where the blue stick is located), computing theta4 ~ theta6 for moving to bin takes so long time (about 50sec). I tried numpy.arctan2 instead of atan2 (I believe it's math.atan2), but can't get advantage. I also think about make a huge LUT for atan2 to save the compute latency, but not sure how fine grain is required. Still not sure why computing theta4~theta6 takes so long randomly.
 
-
+Final result screen shot is captured after 9 trials. It misses one blue rod, but pick 8 of them. 10th rod is placed for next trial.
+![alt text][image5]
+![alt text][image6]
 
 
